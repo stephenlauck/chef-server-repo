@@ -1,6 +1,29 @@
 {
   "name": "patch",
+  "description": "",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "chef_client": {
+        "config": {
+          "chef_server_url": "https://chef.services.com/organizations/delivery",
+          "data_collector.server_url": "https://automate.services.com/data-collector/v0/",
+          "data_collector.token": "93a49a4f2482c64126f7b6015e6b0f30284287ee4054ff8807fb63d9cbd1c506"
+        }
+    },
+    "audit": {
+      "collector": "chef-visibility",
+      "insecure": "false",
+      "profiles": [
+        {
+          "name": "dev-sec/linux-patch-benchmark",
+          "url": "https://github.com/dev-sec/linux-patch-benchmark"
+        }
+      ]
+    }
+  },
+  "chef_type": "role",
   "run_list": [
-    "recipe[audit]"
+    "recipe[audit]",
+    "recipe[chef-client::config]"
   ]
 }
